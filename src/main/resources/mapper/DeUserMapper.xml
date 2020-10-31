@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.co.allttss.api.mapper.DeUserMapper">
+    <cache eviction="LRU" type="cn.co.allttss.api.common.config.MybatisRedisCache"/>
+    <sql id="Base_Column_List">
+        id, name
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long">
+    </select>
+    <update id="updateByPrimaryKey" parameterType="cn.co.allttss.api.entity.DeUser" flushCache="true">
+            update deluser
+            set name = #{name}
+            where id = #{id}
+    </update>
+    <!-- 对这个语句useCache="true"默认是true，可以不写 -->
+    <!--数据返回统一使用实体类resultType-->
+    <select id="getAll" resultType="cn.co.allttss.api.multientity.userResult" useCache="true">
+        select
+        <include refid="Base_Column_List"/>
+        from deluser
+    </select>
+
+    <!-- 对这个语句禁用二级缓存 -->
+    <select id="findByPage" useCache="false">
+        select
+        <include refid="Base_Column_List"/>
+        from person
+    </select>
+</mapper>

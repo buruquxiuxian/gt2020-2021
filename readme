@@ -1,0 +1,4 @@
+工程使用了redis，所以mapper除了更新语句之外，都要加一句flushCache="true" 来清空缓存，保证数据的一致性
+web包内不使用所有的controler 都不使用@RestController
+所有web页面都在templates包内
+static文件夹存放静态资源，如js文件、css文件、图片等等

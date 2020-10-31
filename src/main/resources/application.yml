@@ -1,0 +1,70 @@
+server:
+  #address: 127.0.0.1
+  port: 80
+spring:
+  jackson:
+    date-format: yyyy-MM-dd-HH-mm-ss
+    timezone: GMT+8
+    serialization:
+      write-dates-as-timestamps: false
+  freemarker:
+    checkTemplateLocation: false
+  datasource:
+    url: jdbc:mysql://localhost:3306/cdnight?useSSL=false&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+    redis:
+      database:
+      host: 127.0.0.1
+      port: 6379
+      password:
+      pool:
+        max-active: 8
+        max-wait: 1
+        max-idle: 8
+        min-idle: 0
+        timeout: 0
+mybatis:
+  type-aliases-package: cn.co.allttss.api.entity
+  jpa:
+    database: mysql
+  thymeleaf:
+    prefix: classpath:/templates
+    encoding: UTF-8
+    content-type: text/html
+    cache: false
+    mvc:
+      view:
+        prefix: /
+        suffix: .html
+  pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    offsetAsPageNum: true
+    rowBoundsWithCount: true
+    pageSizeZero: true
+    params: pageNum=pageHelperStart;pageSize=pageHelperRows;
+    filters: stat
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    cache-enabled: true
+  mapper-locations:
+    classpath:mapper/*.xml
+logging:
+  classpath:logback.xml
+debug: false
